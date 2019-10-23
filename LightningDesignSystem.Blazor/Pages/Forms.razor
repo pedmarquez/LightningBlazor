@@ -1,0 +1,33 @@
+﻿@page "/Forms"
+
+    <Card>
+        <EditForm   Model="@exampleModel" OnValidSubmit="@HandleValidSubmit"   >
+            <DataAnnotationsValidator  />
+            @*<ValidationSummary />*@
+
+
+
+
+        <div class="slds-form-element" >
+            <label class="slds-form-element__label" for="form-element-01">Form Label</label>
+            <div class="slds-form-element__control">
+                <InputText  id="form-element-01" @bind-Value="@exampleModel.Name" class="slds-input" placeholder="Placeholder"  />
+
+            </div>
+            <div class="slds-form-element__help" id="form-error-01"> <ValidationMessage  For="@(() => exampleModel.Name)"  /></div>
+           
+        </div>
+            <Button Style="ButtonStyle.Neutral" type="submit">Submit</Button>
+        </EditForm>
+    </Card>
+
+
+@code {
+    private ExampleModel exampleModel = new ExampleModel();
+
+ 
+    private void HandleValidSubmit()
+    {
+        Console.WriteLine("OnValidSubmit");
+    }
+}

@@ -1,0 +1,76 @@
+﻿@page "/fetchdata"
+
+@using LightningDesignSystem.Blazor
+@inject WeatherForecastService ForecastService
+
+<PageHeader Title="Weather forecast" Meta="This component demonstrates fetching data from a service.">
+    <IconTemplate>
+        <Icon Name="opportunity" Category="IconCategory.Standard" Size="IconSize.Small" Title="opportunity" SvgCss="slds-page-header__icon" />
+    </IconTemplate>
+</PageHeader>
+
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <Card>
+        <table class="slds-table slds-table_cell-buffer slds-no-row-hover slds-table_bordered slds-table_fixed-layout" role="grid">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Name">Name</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Company">Company</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Title">Title</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Email">Email</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var forecast in forecasts)
+                {
+                    <tr class="slds-hint-parent">
+                        <td role="gridcell">@forecast.Date.ToShortDateString()</td>
+                        <td role="gridcell">@forecast.TemperatureC</td>
+                        <td role="gridcell">@forecast.TemperatureF</td>
+                        <td role="gridcell">@forecast.Summary</td>
+                    </tr>
+                }
+                @*<tr class="slds-hint-parent">
+                        <th scope="row">
+                            <div class="slds-truncate" title="Amy Choi">
+                                <a href="javascript:void(0);" tabindex="-1">Amy Choi</a>
+                            </div>
+                        </th>
+                        <td role="gridcell">
+                            <div class="slds-truncate" title="Company One">Company One</div>
+                        </td>
+                        <td role="gridcell">
+                            <div class="slds-truncate" title="Director of Operations">Director of Operations</div>
+                        </td>
+                        <td role="gridcell">
+                            <div class="slds-truncate" title="adam@company.com">adam@company.com</div>
+                        </td>
+                    </tr>*@
+            </tbody>
+        </table>
+    </Card>
+
+}
+
+@code {
+    WeatherForecast[] forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+    }
+}

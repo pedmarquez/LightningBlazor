@@ -1,0 +1,84 @@
+﻿@page "/Alerts"
+    
+    <Card  Title="Alert">
+
+        <h1>Info</h1>
+        <Alert Variant="Alert.Theme.Info">
+            <Icon Name="user" Category="IconCategory.Utility" Size="IconSize.xSmall" CssClass="slds-m-right_x-small" Title="User" />
+
+            <h2>
+                Logged in as John Smith (johnsmith@acme.com).
+                <a href="javascript:void(0);">Log out</a>
+            </h2>
+        </Alert>
+        <h1>Success</h1>
+        <Alert Variant="Alert.Theme.Success">
+            <Icon Name="success" Category="IconCategory.Utility" Size="IconSize.xSmall" CssClass="slds-m-right_x-small" Title="success" />
+
+            <h2>
+                Logged in as John Smith (johnsmith@acme.com).
+                <a href="javascript:void(0);">Log out</a>
+            </h2>
+        </Alert>
+        <h1>Warning</h1>
+        <Alert Variant="Alert.Theme.Warning">
+            <Icon Name="warning" Category="IconCategory.Utility" Size="IconSize.xSmall" CssClass="slds-m-right_x-small" Title="warning" />
+
+            <h2>
+                Your browser is outdated. Your Salesforce experience may be degraded.
+                <a href="javascript:void(0);">More Information</a>
+            </h2>
+        </Alert>
+        <h1>Error</h1>
+        <Alert Variant="Alert.Theme.Error">
+            <Icon Name="error" Category="IconCategory.Utility" Size="IconSize.xSmall" CssClass="slds-m-right_x-small" Title="Error" />
+
+            <h2>
+                Your browser is currently not supported. Your Salesforce may be degraded.
+                <a href="javascript:void(0);">More Information</a>
+            </h2>
+        </Alert>
+        <h1>Offline</h1>
+        <Alert Variant="Alert.Theme.Offline">
+            <Icon Name="offline" Category="IconCategory.Utility" Size="IconSize.xSmall" CssClass="slds-m-right_x-small" Title="offline" />
+
+            <h2>
+                You are in offline mode.
+                <a href="javascript:void(0);">More Information</a>
+            </h2>
+        </Alert>
+
+        <h1>Close Alert</h1>
+        @if (closeAlert)
+        {
+            <button class="slds-button slds-button_neutral" @onclick="ShowAlert">Show Alert</button>
+        }
+
+        @if (!closeAlert)
+        {
+            <Alert Variant="Alert.Theme.Info" OnClose="OnCloseAlert">
+                <Icon Name="user" Category="IconCategory.Utility" Size="IconSize.xSmall" CssClass="slds-m-right_x-small" Title="User" />
+
+                <h2>
+                    Logged in as John Smith (johnsmith@acme.com).
+                    <a href="javascript:void(0);">Log out</a>
+                </h2>
+            </Alert>
+        }
+
+    </Card>
+
+
+@code {
+    bool closeAlert=true;
+    void OnCloseAlert(MouseEventArgs e)
+    {
+        closeAlert = true;
+       
+    }
+
+    void ShowAlert()
+    {
+        closeAlert = false;
+    }
+}
